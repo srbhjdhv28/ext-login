@@ -15,7 +15,8 @@ NewsFeed = require('./api/models/newsModel');
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/myDB');
+//mongoose.connect('mongodb://localhost/myDB');
+mongoose.connect('mongodb://SaurabhJ:srbh_jdhv28@ds159641.mlab.com:59641/mydb');
 var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -38,6 +39,7 @@ newsrouter(app);
 
 // module.exports = router;
 // module.exports = newsrouter;
+//Changes
 
 app.listen(port,function(){
     console.log('Rest server is on'+port);
