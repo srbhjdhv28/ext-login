@@ -14,18 +14,18 @@ var mongoose = require('mongoose'),
 
 
 exports.authorizeMe = function(req,res){
-    Register.find({},function(request,task){
-        res.json(task);
-    })
-//     console.log(req.query);
-//     var token = req.headers['x-access-token'];
-//     if(!token) return res.status(401).send({auth:false,message:'No token header'});
+    // Register.find({},function(request,task){
+    //     res.json(task);
+    // })
+    console.log(req.query);
+    var token = req.headers['x-access-token'];
+    if(!token) return res.status(401).send({auth:false,message:'No token header'});
 
-//     jwt.verify(token,'secretKey',function(err,decoded){
-//         if(err) return res.status(401).send({auth:false,message:'Invalid token'});
+    jwt.verify(token,'secretKey',function(err,decoded){
+        if(err) return res.status(401).send({auth:false,message:'Invalid token'});
 
-//         res.status(200).send(decoded);
-//     });
+        res.status(200).send(decoded);
+    });
 };
 
 
