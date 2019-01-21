@@ -38,6 +38,7 @@ newsrouter(app);
 
 //module.exports = router;
 // module.exports = newsrouter;
+//Changes
 
 app.listen(port,function(){
     console.log('Rest server is on'+port);
