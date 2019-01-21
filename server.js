@@ -36,7 +36,7 @@ var newsrouter = require('./api/routes/newsRoutes');
 router(app);
 newsrouter(app);
 
-//module.exports = router;
+// module.exports = router;
 // module.exports = newsrouter;
 
 app.listen(port,function(){
