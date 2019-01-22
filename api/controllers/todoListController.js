@@ -10,7 +10,8 @@ const authy = require('authy')(authyKey);
 
 var https = require('https');
 var mongoose = require('mongoose'),
-    Register = mongoose.model('Register');
+    Register = mongoose.model('Register'),
+    Employee = mongoose.model('Employee');
 
 
 exports.authorizeMe = function(req,res){
@@ -26,6 +27,13 @@ exports.authorizeMe = function(req,res){
 
         res.status(200).send(decoded);
     });
+};
+
+exports.getAllEmployeeData = function(req,res){
+    console.log('setttt');
+    Employee.find({},function(request,response){
+            res.json(response);
+    })
 };
 
 

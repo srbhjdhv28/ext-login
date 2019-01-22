@@ -18,6 +18,14 @@ mongoose.Promise = global.Promise;
 //mongoose.connect('mongodb://localhost/myDB');
 mongoose.connect('mongodb://srbhjdhv:srbhjdhv28@ds159641.mlab.com:59641/mydb');
 var db = mongoose.connection;
+mongoose.connection.on('open', function (ref) {
+    console.log('Connected to mongo server.');
+    //trying to get collection names
+    mongoose.connection.db.collections(function (err, names) {
+        //console.log(names); // [{ name: 'dbname.myCollection' }]
+        module.exports.Collection = names;
+    });
+})
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 

@@ -10,5 +10,15 @@ var registerSchema = mongoose.Schema({
     country_code:String
 });
 
+var employeeSchema = mongoose.Schema({
+    firstName:String,
+    lastName:String,
+    name:String,
+    dateOfJoining:Date,
+    dob:Date,
+    house:String,
+    email:String
+});
 
 module.exports = mongoose.model('Register',registerSchema);
+module.exports = mongoose.model('Employee',employeeSchema,'employee');

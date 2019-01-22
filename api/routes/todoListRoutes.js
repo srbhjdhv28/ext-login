@@ -19,6 +19,8 @@ module.exports = function(app){
     app.route('/getCellData')
         .get(todoListController.getOTPandVerify);
 
+    app.route('/getEmployeeData').get(todoListController.getAllEmployeeData);
+
 
 
 };
