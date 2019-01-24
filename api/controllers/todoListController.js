@@ -106,6 +106,7 @@ exports.registerPhoneNumner = function(req,res){
 exports.login = function(req,res){
     console.log(req.body);
     Register.findOne({email:req.body.email},function(error,user){
+        console.log(user);
         if(error) return res.status(500).send({auth:false,message:'Error in server'});
         if (!user) return res.status(404).send({auth:false,message:"Invalid User"});
 
@@ -114,6 +115,11 @@ exports.login = function(req,res){
 
         var token = jwt.sign({id:user._id},'secretKey',{expiresIn:86400});
         if(!token) return res.status(400).send({auth:false,message:"Invalid pwd"});
+
+        //check user in Employee table
+        Employee.findOne({email:user.email},function(error,employeeData){
+            if(!employeeData) return.status(500).send({auth:false,message:"Employee data not found"});
+        })
 
         res.status(200).send({auth:true,token:user});
 
