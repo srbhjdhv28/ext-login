@@ -21,6 +21,10 @@ module.exports = function(app){
 
     app.route('/getEmployeeData').get(todoListController.getAllEmployeeData);
 
+    app.route('/getAllEvents').get(todoListController.getAllEventsData);
+
+    
+
 
 
 };

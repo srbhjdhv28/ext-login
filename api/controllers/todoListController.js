@@ -11,13 +11,11 @@ const authy = require('authy')(authyKey);
 var https = require('https');
 var mongoose = require('mongoose'),
     Register = mongoose.model('Register'),
-    Employee = mongoose.model('Employee');
+    Employee = mongoose.model('Employee'),
+    Events = mongoose.model('Events');
 
 
 exports.authorizeMe = function(req,res){
-    // Register.find({},function(request,task){
-    //     res.json(task);
-    // })
     console.log(req.query);
     var token = req.headers['x-access-token'];
     if(!token) return res.status(401).send({auth:false,message:'No token header'});
@@ -31,9 +29,23 @@ exports.authorizeMe = function(req,res){
 
 exports.getAllEmployeeData = function(req,res){
     console.log('setttt');
-    Employee.find({},function(request,response){
+    Employee.find({},function(error,response){
             res.json(response);
     })
+};
+
+exports.getAllEventsData = function(req,res){
+    var userId = req.query.userId;
+    if(userId){
+        Events.find({empId:userId},function(error,response){
+            res.json(response);
+        });
+    }else{
+        Events.find({},function(request,response){
+            res.json(response);
+        });
+    }
+    
 };
 
 
@@ -118,11 +130,9 @@ exports.login = function(req,res){
 
         //check user in Employee table
         Employee.findOne({email:user.email},function(error,employeeData){
-            if(!employeeData) return.status(500).send({auth:false,message:"Employee data not found"});
-        })
-
-        res.status(200).send({auth:true,token:user});
-
+            if(error) return res.status(500).send({auth:false,message:"Employee data not found"});
+            return res.status(200).send({auth:true,token:token,userData:employeeData});
+        });
     });
 };
 

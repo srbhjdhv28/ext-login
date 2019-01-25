@@ -20,5 +20,16 @@ var employeeSchema = mongoose.Schema({
     email:String
 });
 
+var employeeSchema = mongoose.Schema({
+    eventImg: String,
+    eventType: String,
+    eventName: String,
+    eventDate: Date,
+    eventTime: Date,
+    eventDescription:String,
+    empId:String
+});
+
 module.exports = mongoose.model('Register',registerSchema);
 module.exports = mongoose.model('Employee',employeeSchema,'employee');
+module.exports = mongoose.model('Events',employeeSchema,'events');
