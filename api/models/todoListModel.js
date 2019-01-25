@@ -24,7 +24,7 @@ var eventSchema = mongoose.Schema({
     eventImg: String,
     eventType: String,
     eventName: String,
-    eventDate: Date,
+    eventDate: String,
     eventTime: String,
     eventDescription:String
 });
