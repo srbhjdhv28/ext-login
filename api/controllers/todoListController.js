@@ -12,7 +12,8 @@ var https = require('https');
 var mongoose = require('mongoose'),
     Register = mongoose.model('Register'),
     Employee = mongoose.model('Employee'),
-    Events = mongoose.model('Events');
+    Events = mongoose.model('Events'),
+    EnrolledEvents = mongoose.model('EnrolledEvents');
 
 
 exports.authorizeMe = function(req,res){
@@ -37,7 +38,7 @@ exports.getAllEmployeeData = function(req,res){
 exports.getAllEventsData = function(req,res){
     var userId = req.query.userId;
     if(userId){
-        Events.find({empId:userId},function(error,response){
+        EnrolledEvents.find({userId:userId},function(error,response){
             res.json(response);
         });
     }else{
@@ -114,6 +115,23 @@ exports.registerPhoneNumner = function(req,res){
     request.end();
 
 };
+
+exports.saveUserRelatedEvents = function(req,res){
+    
+    EnrolledEvents.findOne({userId:req.body.userId,eventId:req.body.eventId},function(error,recordPresnt){
+        if(error) return res.status(500).send({auth:false,message:'Failed To save data'});
+        if(recordPresnt){
+            console.log(recordPresnt);
+            return res.send({auth:false,message:'User is already enrolled to this event'});
+        }else{
+            var enrolledObj = new EnrolledEvents(req.body);
+            enrolledObj.save(function(error,result){
+                if(error) return res.status(500).send({auth:false,message:'Failed To save data'});
+                return res.send({auth:true,message:'Data Inserted Successfully'});
+            });
+        }
+    });
+}
 
 exports.login = function(req,res){
     console.log(req.body);

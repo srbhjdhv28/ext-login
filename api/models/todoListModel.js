@@ -30,6 +30,12 @@ var employeeSchema = mongoose.Schema({
     empId:String
 });
 
+var enrolledEventSchema = mongoose.Schema({
+   userId:String,
+   eventId:String
+});
+
 module.exports = mongoose.model('Register',registerSchema);
 module.exports = mongoose.model('Employee',employeeSchema,'employee');
 module.exports = mongoose.model('Events',employeeSchema,'events');
+module.exports = mongoose.model('EnrolledEvents',enrolledEventSchema,'enrolledevents');

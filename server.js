@@ -22,7 +22,7 @@ mongoose.connection.on('open', function (ref) {
     console.log('Connected to mongo server.');
     //trying to get collection names
     mongoose.connection.db.collections(function (err, names) {
-        //console.log(names); // [{ name: 'dbname.myCollection' }]
+        console.log(names); // [{ name: 'dbname.myCollection' }]
         module.exports.Collection = names;
     });
 })

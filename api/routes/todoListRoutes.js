@@ -23,6 +23,8 @@ module.exports = function(app){
 
     app.route('/getAllEvents').get(todoListController.getAllEventsData);
 
+    app.route('/saveData').put(todoListController.saveUserRelatedEvents);
+
     
 
 
