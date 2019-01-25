@@ -1,4 +1,5 @@
 'use strict';
+var dateFormat = require('dateformat');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 
@@ -37,15 +38,31 @@ exports.getAllEmployeeData = function(req,res){
 
 exports.getAllEventsData = function(req,res){
     var userId = req.query.userId;
-    if(userId){
-        EnrolledEvents.find({userId:userId},function(error,response){
-            res.json(response);
+    // if(userId){
+    //     EnrolledEvents.find({userId:userId},function(error,response){
+    //         res.json(response);
+    //     });
+    // }else{
+        Events.find({},function(request,eventsRes){
+            if(userId){
+                EnrolledEvents.find({userId:userId},function(error,userRes){
+                    //res.json(response);
+                    var responseObj = {
+                        'Events':eventsRes,
+                        'UserEvents':userRes
+                    }
+                    res.json(responseObj);
+                });
+            }else{
+                var responseObj = {
+                    'Events':responseObj,
+                    'UserEvents':[]
+                }
+                res.json(responseObj);
+            }
+            
         });
-    }else{
-        Events.find({},function(request,response){
-            res.json(response);
-        });
-    }
+    // }
     
 };
 

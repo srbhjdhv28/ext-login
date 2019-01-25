@@ -20,14 +20,13 @@ var employeeSchema = mongoose.Schema({
     email:String
 });
 
-var employeeSchema = mongoose.Schema({
+var eventSchema = mongoose.Schema({
     eventImg: String,
     eventType: String,
     eventName: String,
     eventDate: Date,
-    eventTime: Date,
-    eventDescription:String,
-    empId:String
+    eventTime: String,
+    eventDescription:String
 });
 
 var enrolledEventSchema = mongoose.Schema({
@@ -37,5 +36,5 @@ var enrolledEventSchema = mongoose.Schema({
 
 module.exports = mongoose.model('Register',registerSchema);
 module.exports = mongoose.model('Employee',employeeSchema,'employee');
-module.exports = mongoose.model('Events',employeeSchema,'events');
+module.exports = mongoose.model('Events',eventSchema,'events');
 module.exports = mongoose.model('EnrolledEvents',enrolledEventSchema,'enrolledevents');
