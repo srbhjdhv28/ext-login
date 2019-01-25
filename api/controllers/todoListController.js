@@ -130,6 +130,7 @@ exports.login = function(req,res){
 
         //check user in Employee table
         Employee.findOne({email:user.email},function(error,employeeData){
+            
             if(error) return res.status(500).send({auth:false,message:"Employee data not found"});
             return res.status(200).send({auth:true,token:token,userData:employeeData});
         });
